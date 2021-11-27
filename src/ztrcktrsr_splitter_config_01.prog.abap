@@ -88,6 +88,7 @@ CLASS lcl_screen_config IMPLEMENTATION.
 ENDCLASS.
 
 INITIALIZATION.
+
   DATA(docker) = NEW cl_gui_docking_container( side = cl_gui_docking_container=>dock_at_bottom ratio = 80 ).
   DATA(splitter_main)   = NEW cl_gui_splitter_container( parent = docker columns = 3 rows = 1 ).
   DATA(splitter_left)   = NEW cl_gui_splitter_container( parent = splitter_main->get_container( row = 1 column = 1 ) rows = 3 columns = 1 ).
