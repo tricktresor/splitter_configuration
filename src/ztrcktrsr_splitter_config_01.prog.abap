@@ -108,5 +108,4 @@ START-OF-SELECTION.
     LOOP AT config_obj-rows INTO DATA(height).
       WRITE height.
     ENDLOOP.
-
   ENDLOOP.
