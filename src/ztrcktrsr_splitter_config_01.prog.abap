@@ -6,7 +6,6 @@ CLASS lcl_screen_config DEFINITION.
   PUBLIC SECTION.
     TYPES:
       BEGIN OF _info,
-        name   TYPE string,
         object TYPE REF TO object,
         parent TYPE REF TO object,
         rows   TYPE STANDARD TABLE OF i WITH DEFAULT KEY,
@@ -81,7 +80,6 @@ CLASS lcl_screen_config IMPLEMENTATION.
 
         info-object = child.
         info-parent = control.
-*        info-name   = splitter->av_name.
         APPEND info TO list.
       ENDIF.
       add_container( control = child ).
@@ -102,7 +100,13 @@ START-OF-SELECTION.
   DATA(config) = configuration->get_configuration( docker ).
   LOOP AT config INTO DATA(config_obj).
     WRITE: / 'object', sy-tabix.
-    WRITE: / ' - columns:', lines( config_obj-cols ).
-    WRITE: / ' - rows:   ', lines( config_obj-rows ).
+    WRITE: / ' - columns:', lines( config_obj-cols ), 'sizes:'.
+    LOOP AT config_obj-cols INTO DATA(width).
+      WRITE width.
+    ENDLOOP.
+    WRITE: / ' - rows:   ', lines( config_obj-rows ), 'sizes:'.
+    LOOP AT config_obj-rows INTO DATA(height).
+      WRITE height.
+    ENDLOOP.
 
   ENDLOOP.
